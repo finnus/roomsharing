@@ -10,11 +10,7 @@ from django.urls import reverse
 from roomsharing.users.forms import UserChangeForm
 from roomsharing.users.models import User
 from roomsharing.users.tests.factories import UserFactory
-from roomsharing.users.views import (
-    UserRedirectView,
-    UserUpdateView,
-    user_detail_view,
-)
+from roomsharing.users.views import UserRedirectView, UserUpdateView, user_detail_view
 
 pytestmark = pytest.mark.django_db
 
