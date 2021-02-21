@@ -7,12 +7,13 @@ Welcome to Roomsharing's documentation!
 ======================================================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
    howto
    pycharm/configuration
    users
+   architecture/ADR/001 _record_architecture_decisions
 
 
 
