@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% load i18n static %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ room.name }}{% endblock %}
+{% block content_title %}
+{% endblock content_title %}
+
+{% block content %}
+
+  <div class="container">
+  <div class="row">
+    <div class="col-12">
+      <svg class="bi" width="32" height="32" fill="currentColor">
+        <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#building"/>
+      </svg>
+      <text class="h4"><a href="#">Organization</a></text>
+      <h1>{{ room.name }}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8">
+      <img src="{{ room.images.first.image.url }}" class="img-fluid" alt="Responsive image">
+    </div>
+    <div class="col-4">
+
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-3">{% trans "Address and contact" %}</h4>
+          <svg class="bi" width="24" height="24" fill="currentColor">
+              <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#geo"/>
+          </svg> Rehlingstr. 2, 79100 Freiburg</p>
+          {% if room.contact_name is not None %}
+            <p class="mdi mdi-24px mdi-account-box"> {{ room.contact_name }}</p>
+          {% endif %}
+
+          <p>
+            <svg class="bi" width="24" height="24" fill="currentColor">
+                <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#envelope"/>
+            </svg>
+            {% if room.contact_mail is not None %}
+            <a href="mailto:{{ room.contact_mail }}">{{ room.contact_mail }}</a>
+            {% else %}
+              <text class="text-secondary">{% trans "nicht hinterlegt" %}</text>
+            {% endif %}
+          </p>
+
+          <p>
+            <svg class="bi" width="24" height="24" fill="currentColor">
+                <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#telephone"/>
+            </svg>
+            {% if room.contact_phone is not None %}
+            <a href="tel:{{ room.contact_phone }}">+49 17291 2093</a>
+            {% else %}
+              <text class="text-secondary">{% trans "nicht hinterlegt" %}</text>
+            {% endif %}
+          </p>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-3">
+      <p class="mdi mdi-24px mdi-account-multiple">{{ room.capacity_from }}
+        - {{ room.capacity_to }} {% trans "Persons" %}</p>
+    </div>
+
+    <div class="col-sm-3">
+      <p class="mdi mdi-24px mdi-crop-square">{{ room.square_meters }} {% trans "m²" %}</p>
+    </div>
+    <div class="col-sm-3">
+      <p class="mdi mdi-24px mdi-swap-horizontal">Free of charge</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h2>{% trans "Aptitudes" %}</h2>
+    </div>
+    {% for aptitude in room.aptitudes.all %}
+      <div class="col-sm-3">
+        <span class="icon mdi mdi-24px {{ aptitude.icon_class }}"> {{ aptitude.name }}</span>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h2>{% trans "Amenities" %}</h2>
+    </div>
+    {% for amenity in room.amenities.all %}
+      <div class="col-sm-3">
+        <span class="icon mdi mdi-24px {{ amenity.icon_class }}"> {{ amenity.name }}</span>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h2>{% trans "Description" %}</h2>
+      {{ room.description|linebreaks }}
+    </div>
+  </div>
+
+
+
+
+    <h2>{% trans "Rules" %}</h2>
+    {{ room.rules }}
+    <h2>{% trans "Compensation" %}</h2>
+    {{ room.compensation }}
+    <h2>{% trans "Availability" %}</h2>
+    {{ room.general_availability }}
+
+{% endblock content %}
+

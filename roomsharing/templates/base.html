@@ -56,8 +56,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
-        <a class="nav-link" href="#">{% trans "Search Room" %}</a>
+        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+        <a class="nav-link" href="{% url 'rooms:list' %}">{% trans "Search Room" %}</a>
         <a class="nav-link" href="#">{% trans "Manage Rooms" %}</a>
         <a class="nav-link" href="{% url 'about' %}">{% trans "About" %}</a>
       </div>
@@ -71,7 +71,7 @@
             {{ request.user.username }}
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href={% url 'users:detail' request.user.username %}>{% trans "My Profile" %}</a></li>
+            <li><a class="dropdown-item" href="{% url 'users:detail' request.user.username %}">{% trans "My Profile" %}</a></li>
             <li><a class="dropdown-item" href="#">{% trans "My Organizations" %}</a></li>
             <div class="dropdown-divider"></div>
             {# URL provided by django-allauth/account/urls.py #}
@@ -92,7 +92,7 @@
 
 </div>
 
-    <div class="container">
+    <div class="container mt-3">
 
       {% if messages %}
           {% for message in messages %}

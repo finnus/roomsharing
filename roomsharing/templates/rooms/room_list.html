@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Rooms" %}{% endblock %}
+{% block content_title %}
+  <h1 class="title">Rooms</h1>
+{% endblock content_title %}
+
+{% block content %}
+  <h1>{% trans "Rooms" %}</h1>
+
+    <div class="row">
+    {% for room in room_list %}
+    <div class="col-3">
+    <div class="card-group">
+      <div class="card">
+        <!-- <img class="card-img-top img-fluid height=200px" src="{{ room.images.first.image.url }}" alt="{{ room.name }} picture"> --!>
+        <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <rect width="100%" height="100%" fill="#868e96"></rect>
+        </svg>
+        <div class="card-body">
+          <h5 class="card-title text-truncate"><a href="{% url 'rooms:detail' room.pk %}">{{ room.name }}</a></h5>
+          <p class="card-text">
+            <svg class="bi" width="24" height="24" fill="currentColor">
+              <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#people"/>
+            </svg>
+            {{ room.capacity_from }} - {{ room.capacity_to }} {% trans "Persons" %}
+          </p>
+          <p class="card-text text-truncate">
+            <svg class="bi" width="24" height="24" fill="currentColor">
+              <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#geo"/>
+            </svg>
+            Rehlingstr. 2, 79100 Freiburg
+          </p>
+          <p class="card-text text-truncate">
+            <svg class="bi" width="24" height="24" fill="currentColor">
+              <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#building"/>
+            </svg>
+            <a href="#">Haus des Engagements</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    </div>
+  {% endfor %}
+  </div>
+
+
+{% endblock content %}
