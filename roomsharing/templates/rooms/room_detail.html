@@ -15,7 +15,7 @@
       <svg class="bi" width="32" height="32" fill="currentColor">
         <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#building"/>
       </svg>
-      <text class="h4"><a href="#">Organization</a></text>
+      <text class="h4"><a href="#">{{ room.owner_organization.name }}</a></text>
       <h1>{{ room.name }}</h1>
     </div>
   </div>
@@ -65,15 +65,17 @@
 
   <div class="row">
     <div class="col-sm-3">
-      <p class="mdi mdi-24px mdi-account-multiple">{{ room.capacity_from }}
-        - {{ room.capacity_to }} {% trans "Persons" %}</p>
+      <p>
+        <svg class="bi" width="24" height="24" fill="currentColor">
+          <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#people"/>
+        </svg>
+        {{ room.capacity_from }} - {{ room.capacity_to }} {% trans "Persons" %}</p>
     </div>
 
     <div class="col-sm-3">
-      <p class="mdi mdi-24px mdi-crop-square">{{ room.square_meters }} {% trans "m²" %}</p>
-    </div>
-    <div class="col-sm-3">
-      <p class="mdi mdi-24px mdi-swap-horizontal">Free of charge</p>
+        <svg class="bi" width="24" height="24" fill="currentColor">
+          <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#square"/>
+        </svg>{{ room.square_meters }} {% trans "m²" %}
     </div>
   </div>
 
@@ -83,7 +85,9 @@
     </div>
     {% for aptitude in room.aptitudes.all %}
       <div class="col-sm-3">
-        <span class="icon mdi mdi-24px {{ aptitude.icon_class }}"> {{ aptitude.name }}</span>
+        <svg class="bi" width="24" height="24" fill="currentColor">
+          <use xlink:href="{% static 'images/bootstrap-icons.svg' %}{{ aptitude.icon }}"/>
+        </svg>{{ aptitude.name }}
       </div>
     {% endfor %}
   </div>

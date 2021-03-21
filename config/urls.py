@@ -18,6 +18,10 @@ urlpatterns = [
     # Your stuff: custom urls includes go here
     # Rooms
     path("rooms/", include("roomsharing.rooms.urls", namespace="rooms")),
+    path(
+        "organizations/",
+        include("roomsharing.rs_organizations.urls", namespace="organizations"),
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

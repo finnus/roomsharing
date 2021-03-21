@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Organizations" %}{% endblock %}
+{% block content_title %}
+
+  <h1>
+    {% trans "Organizations" %}
+  </h1>
+
+
+
+{% endblock content_title %}
+
+{% block content %}
+  <div class="row">
+    {% for organization in organization_list %}
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><a href="#">{{ organization.name }}</a></h5>
+
+      {% if organization.email is not None %}
+        <p class="text-truncate"><a href="mailto:{{ organization.email }}" class="mdi mdi-18px mdi-email"> {{ organization.email }}</a></p>
+      {% endif %}
+
+      {% if organization.website is not None %}
+        <p class="text-truncate"><a href="{{ organization.website }}" class="mdi mdi-18px mdi-link"> {{ organization.website }}</a></p>
+      {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+
+
+{% endblock content %}
