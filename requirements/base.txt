@@ -18,3 +18,4 @@ crispy-bootstrap5==0.2  # https://pypi.org/project/crispy-bootstrap5/
 django-compressor==2.4  # https://github.com/django-compressor/django-compressor
 django-organizations==2.0.0  # https://github.com/bennylope/django-organizations
 django-redis==4.12.1  # https://github.com/jazzband/django-redis
+django-extensions==3.1.1  # https://github.com/django-extensions/django-extensions
