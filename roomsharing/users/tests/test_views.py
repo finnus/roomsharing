@@ -6,6 +6,7 @@ from django.contrib.messages.middleware import MessageMiddleware
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.test import RequestFactory
 from django.urls import reverse
+from django.utils.translation import activate
 
 from roomsharing.users.forms import UserChangeForm
 from roomsharing.users.models import User
@@ -43,6 +44,7 @@ class TestUserUpdateView:
         assert view.get_object() == user
 
     def test_form_valid(self, user: User, rf: RequestFactory):
+        activate('en')
         view = UserUpdateView()
         request = rf.get("/fake-url/")
 

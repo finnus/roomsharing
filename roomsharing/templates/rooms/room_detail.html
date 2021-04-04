@@ -42,7 +42,7 @@
             {% if room.contact_mail is not None %}
             <a href="mailto:{{ room.contact_mail }}">{{ room.contact_mail }}</a>
             {% else %}
-              <text class="text-secondary">{% trans "nicht hinterlegt" %}</text>
+              <text class="text-secondary">{% trans "not added" %}</text>
             {% endif %}
           </p>
 
@@ -53,7 +53,7 @@
             {% if room.contact_phone is not None %}
             <a href="tel:{{ room.contact_phone }}">+49 17291 2093</a>
             {% else %}
-              <text class="text-secondary">{% trans "nicht hinterlegt" %}</text>
+              <text class="text-secondary">{% trans "not added" %}</text>
             {% endif %}
           </p>
 
@@ -83,11 +83,11 @@
     <div class="col-12">
       <h2>{% trans "Aptitudes" %}</h2>
     </div>
-    {% for aptitude in room.aptitudes.all %}
+    {% for roomaptitude in roomaptitudes %}
       <div class="col-sm-3">
         <svg class="bi" width="24" height="24" fill="currentColor">
-          <use xlink:href="{% static 'images/bootstrap-icons.svg' %}{{ aptitude.icon }}"/>
-        </svg>{{ aptitude.name }}
+          <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#{{ roomaptitude.aptitude.icon }}"/>
+        </svg>{{ roomaptitude.aptitude.name }} <i>{{ roomaptitude.specification }}</i>
       </div>
     {% endfor %}
   </div>
@@ -96,9 +96,11 @@
     <div class="col-12">
       <h2>{% trans "Amenities" %}</h2>
     </div>
-    {% for amenity in room.amenities.all %}
+    {% for roomamenity in roomamenities %}
       <div class="col-sm-3">
-        <span class="icon mdi mdi-24px {{ amenity.icon_class }}"> {{ amenity.name }}</span>
+        <svg class="bi" width="24" height="24" fill="currentColor">
+          <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#{{ roomamenity.amenity.icon }}"/>
+        </svg>{{ roomamenity.amenity.name }} <i>{{ roomamenity.specification }}</i>
       </div>
     {% endfor %}
   </div>

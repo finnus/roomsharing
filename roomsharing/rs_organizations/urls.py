@@ -1,6 +1,9 @@
 from django.urls import path
 
-from roomsharing.rs_organizations.views import organization_list_view
+from roomsharing.rs_organizations.views import organization_detail_view, organization_list_view
 
 app_name = "rs_organizations"
-urlpatterns = [path("", organization_list_view, name="list")]
+urlpatterns = [
+    path("", organization_list_view, name="list"),
+    path("<str:pk>/", organization_detail_view, name="detail"),
+]

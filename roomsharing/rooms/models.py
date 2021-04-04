@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 from roomsharing.rs_organizations.models import Organization
+from PIL import Image
 
 
 class Room(models.Model):
@@ -32,6 +33,34 @@ class Room(models.Model):
         verbose_name = _("Room")
         verbose_name_plural = _("Rooms")
         unique_together = [["name", "owner_organization"]]
+
+
+def roomimage_path(instance, filename):
+    return f"rooms/room/{instance.room.id}/room_images/{filename}"
+
+
+class RoomImage(models.Model):
+    room = models.ForeignKey(
+        Room,
+        related_name='roomimages_of_room',
+        related_query_name="roomimage_of_room",
+        on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=roomimage_path)
+    alt_description = models.CharField(max_length=200)
+    order = models.IntegerField(null=True)
+
+    def __str__(self):
+        return str(self.room)
+
+    def get_absolute_url(self):
+        return reverse("rooms:detail", kwargs={"pk": self.room.pk})
+
+    def save(self, *args, **kwargs):
+        #  shrink image to max-width/height of 1920px, change quality and optimize
+        super(RoomImage, self).save(*args, **kwargs)
+        img = Image.open(self.image.path)
+        img.thumbnail([1920, 1920])
+        img.save(self.image.path, quality=90, optimize=True)
 
 
 class Aptitude(models.Model):
