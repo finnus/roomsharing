@@ -1,9 +1,9 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from PIL import Image
 
 from roomsharing.rs_organizations.models import Organization
-from PIL import Image
 
 
 class Room(models.Model):
@@ -42,9 +42,10 @@ def roomimage_path(instance, filename):
 class RoomImage(models.Model):
     room = models.ForeignKey(
         Room,
-        related_name='roomimages_of_room',
+        related_name="roomimages_of_room",
         related_query_name="roomimage_of_room",
-        on_delete=models.CASCADE)
+        on_delete=models.CASCADE,
+    )
     image = models.ImageField(upload_to=roomimage_path)
     alt_description = models.CharField(max_length=200)
     order = models.IntegerField(null=True)

@@ -8,18 +8,39 @@ import roomsharing.rooms.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('rooms', '0004_auto_20210321_1828'),
+        ("rooms", "0004_auto_20210321_1828"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='RoomImage',
+            name="RoomImage",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(upload_to=roomsharing.rooms.models.roomimage_path)),
-                ('alt_description', models.CharField(max_length=200)),
-                ('order', models.IntegerField(null=True)),
-                ('room', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='roomimages_of_room', related_query_name='roomimage_of_room', to='rooms.Room')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "image",
+                    models.ImageField(
+                        upload_to=roomsharing.rooms.models.roomimage_path
+                    ),
+                ),
+                ("alt_description", models.CharField(max_length=200)),
+                ("order", models.IntegerField(null=True)),
+                (
+                    "room",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="roomimages_of_room",
+                        related_query_name="roomimage_of_room",
+                        to="rooms.Room",
+                    ),
+                ),
             ],
         ),
     ]

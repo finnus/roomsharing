@@ -1,6 +1,6 @@
 from django.views.generic import DetailView, ListView
 
-from .models import Room, RoomAptitude, RoomAmenity
+from .models import Room, RoomAmenity, RoomAptitude
 
 
 class RoomDetailView(DetailView):
@@ -11,8 +11,12 @@ class RoomDetailView(DetailView):
         room = self.get_object().pk
         context = super().get_context_data(**kwargs)
 
-        context["roomaptitudes"] = RoomAptitude.objects.filter(room=room).prefetch_related("room", "aptitude")
-        context["roomamenities"] = RoomAmenity.objects.filter(room=room).prefetch_related("room", "amenity")
+        context["roomaptitudes"] = RoomAptitude.objects.filter(
+            room=room
+        ).prefetch_related("room", "aptitude")
+        context["roomamenities"] = RoomAmenity.objects.filter(
+            room=room
+        ).prefetch_related("room", "amenity")
 
         return context
 

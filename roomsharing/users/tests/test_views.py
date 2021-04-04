@@ -44,7 +44,7 @@ class TestUserUpdateView:
         assert view.get_object() == user
 
     def test_form_valid(self, user: User, rf: RequestFactory):
-        activate('en')
+        activate("en")
         view = UserUpdateView()
         request = rf.get("/fake-url/")
 

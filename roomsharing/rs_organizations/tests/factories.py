@@ -1,6 +1,5 @@
-from factory import Sequence
+from factory import Faker, Sequence
 from factory.django import DjangoModelFactory
-from factory import Faker
 
 from roomsharing.rs_organizations.models import Organization
 
@@ -9,7 +8,7 @@ class OrganizationFactory(DjangoModelFactory):
     class Meta:
         model = Organization
 
-    name = Sequence(lambda n: "Organization%d" %n)
+    name = Sequence(lambda n: "Organization%d" % n)
     description = Faker("sentence", nb_words=10)
     email = Faker("email")
     phone = Faker("phone_number")
