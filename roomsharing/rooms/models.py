@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django_extensions.db.fields import AutoSlugField
 from PIL import Image
 
 from roomsharing.rs_organizations.models import Organization
@@ -9,30 +10,33 @@ from roomsharing.rs_organizations.models import Organization
 class Room(models.Model):
     # characteristics of the room
     name = models.CharField(_("Name"), max_length=200)
-    description = models.TextField(_("Description"), max_length=4000)
+    description = models.TextField(
+        _("Description"), max_length=4000, blank=True, null=True
+    )
     capacity_from = models.IntegerField(_("Capacity from"), default=10)
     capacity_to = models.IntegerField(_("Capacity to"), default=15)
     square_meters = models.IntegerField(_("Square Meters"), null=True, blank=True)
-    rules = models.TextField(_("Square Meters"), max_length=2000, blank=True, null=True)
+    rules = models.TextField(_("Rules"), max_length=2000, blank=True, null=True)
     published = models.BooleanField(_("Published"), default=False)
     # relations
-    owner_organization = models.ForeignKey(
+    organization = models.ForeignKey(
         Organization,
         related_name="rooms_of_organization",
         related_query_name="room_of_organization",
         on_delete=models.PROTECT,
     )
+    slug = AutoSlugField(populate_from=["organization", "name"])
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("rooms:detail", kwargs={"pk": self.pk})
+        return reverse("rooms:detail", kwargs={"slug": self.slug})
 
     class Meta:
         verbose_name = _("Room")
         verbose_name_plural = _("Rooms")
-        unique_together = [["name", "owner_organization"]]
+        unique_together = [["name", "organization"]]
 
 
 def roomimage_path(instance, filename):
@@ -48,7 +52,11 @@ class RoomImage(models.Model):
     )
     image = models.ImageField(upload_to=roomimage_path)
     alt_description = models.CharField(max_length=200)
-    order = models.IntegerField(null=True)
+    order = models.IntegerField(
+        null=True,
+        default=1,
+        help_text="The image with the lowest number is shown first.",
+    )
 
     def __str__(self):
         return str(self.room)
@@ -63,11 +71,18 @@ class RoomImage(models.Model):
         img.thumbnail([1920, 1920])
         img.save(self.image.path, quality=90, optimize=True)
 
+    class Meta:
+        verbose_name = _("Room Image")
+        verbose_name_plural = _("Room Images")
+        ordering = ["order"]
+
 
 class Aptitude(models.Model):
     name = models.CharField(_("Name"), max_length=30, unique=True)
-    description = models.CharField(_("Description"), max_length=200)
-    icon = models.CharField(_("Icon"), max_length=25, default="bi-question-circle")
+    description = models.CharField(
+        _("Description"), max_length=200, blank=True, null=True
+    )
+    icon = models.CharField(_("Icon"), max_length=25, default="question-circle")
 
     def __str__(self):
         return self.name
@@ -90,7 +105,9 @@ class RoomAptitude(models.Model):
         related_query_name="roomaptitude_of_aptitude",
         on_delete=models.PROTECT,
     )
-    specification = models.CharField(_("Specification"), max_length=400)
+    specification = models.CharField(
+        _("Specification"), max_length=400, blank=True, null=True
+    )
 
     def __str__(self):
         return self.room.name + ": " + self.aptitude.name
@@ -103,8 +120,10 @@ class RoomAptitude(models.Model):
 
 class Amenity(models.Model):
     name = models.CharField(_("Name"), max_length=30)
-    description = models.CharField(_("Description"), max_length=200)
-    icon = models.CharField(_("Icon"), max_length=25, default="bi-question-circle")
+    description = models.CharField(
+        _("Description"), max_length=200, blank=True, null=True
+    )
+    icon = models.CharField(_("Icon"), max_length=25, default="question-circle")
 
     def __str__(self):
         return self.name
@@ -127,7 +146,9 @@ class RoomAmenity(models.Model):
         related_query_name="roomamenity_of_aptitude",
         on_delete=models.PROTECT,
     )
-    specification = models.CharField(_("Specification"), max_length=400)
+    specification = models.CharField(
+        _("Specification"), max_length=400, blank=True, null=True
+    )
 
     def __str__(self):
         return self.room.name + ": " + self.amenity.name

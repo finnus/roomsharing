@@ -1,6 +1,10 @@
 from django.contrib import admin
 
-from .models import Amenity, Aptitude, Room, RoomAmenity, RoomAptitude
+from .models import Amenity, Aptitude, Room, RoomAmenity, RoomAptitude, RoomImage
+
+
+class RoomImageInline(admin.TabularInline):
+    model = RoomImage
 
 
 class RoomAptitudeInline(admin.TabularInline):
@@ -12,7 +16,7 @@ class RoomAmenityInline(admin.TabularInline):
 
 
 class RoomAdmin(admin.ModelAdmin):
-    inlines = [RoomAptitudeInline, RoomAmenityInline]
+    inlines = [RoomAptitudeInline, RoomAmenityInline, RoomImageInline]
 
 
 admin.site.register(Room, RoomAdmin)
@@ -20,3 +24,4 @@ admin.site.register(Aptitude)
 admin.site.register(RoomAptitude)
 admin.site.register(Amenity)
 admin.site.register(RoomAmenity)
+admin.site.register(RoomImage)

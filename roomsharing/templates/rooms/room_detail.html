@@ -10,89 +10,124 @@
 {% block content %}
 
   <div class="container">
-  <div class="row">
-    <div class="col-12">
-      <svg class="bi" width="32" height="32" fill="currentColor">
-        <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#building"/>
-      </svg>
-      <text class="h4"><a href="#">{{ room.owner_organization.name }}</a></text>
-      <h1>{{ room.name }}</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-8">
-      <img src="{{ room.images.first.image.url }}" class="img-fluid" alt="Responsive image">
-    </div>
-    <div class="col-4">
-
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title mb-3">{% trans "Address and contact" %}</h4>
-          <svg class="bi" width="24" height="24" fill="currentColor">
-              <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#geo"/>
-          </svg> Rehlingstr. 2, 79100 Freiburg</p>
-          {% if room.contact_name is not None %}
-            <p class="mdi mdi-24px mdi-account-box"> {{ room.contact_name }}</p>
-          {% endif %}
-
-          <p>
-            <svg class="bi" width="24" height="24" fill="currentColor">
-                <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#envelope"/>
-            </svg>
-            {% if room.contact_mail is not None %}
-            <a href="mailto:{{ room.contact_mail }}">{{ room.contact_mail }}</a>
-            {% else %}
-              <text class="text-secondary">{% trans "not added" %}</text>
-            {% endif %}
-          </p>
-
-          <p>
-            <svg class="bi" width="24" height="24" fill="currentColor">
-                <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#telephone"/>
-            </svg>
-            {% if room.contact_phone is not None %}
-            <a href="tel:{{ room.contact_phone }}">+49 17291 2093</a>
-            {% else %}
-              <text class="text-secondary">{% trans "not added" %}</text>
-            {% endif %}
-          </p>
-
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-3">
-      <p>
-        <svg class="bi" width="24" height="24" fill="currentColor">
-          <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#people"/>
+    <div class="row">
+      <div class="col-12">
+        <svg class="bi" width="32" height="32" fill="currentColor">
+          <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#building"/>
         </svg>
-        {{ room.capacity_from }} - {{ room.capacity_to }} {% trans "Persons" %}</p>
-    </div>
-
-    <div class="col-sm-3">
-        <svg class="bi" width="24" height="24" fill="currentColor">
-          <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#square"/>
-        </svg>{{ room.square_meters }} {% trans "m²" %}
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-12">
-      <h2>{% trans "Aptitudes" %}</h2>
-    </div>
-    {% for roomaptitude in roomaptitudes %}
-      <div class="col-sm-3">
-        <svg class="bi" width="24" height="24" fill="currentColor">
-          <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#{{ roomaptitude.aptitude.icon }}"/>
-        </svg>{{ roomaptitude.aptitude.name }} <i>{{ roomaptitude.specification }}</i>
+        <text class="h5"><a href="#">{{ room.organization.name }}</a></text>
+        <h1>{{ room.name }}</h1>
       </div>
-    {% endfor %}
-  </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
 
-  <div class="row">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            {% for image in roomimages %}
+              <button type="button" data-bs-target="#carouselExampleIndicators"
+                      data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}
+                      aria-current="true" aria-label="Slide {{ forloop.counter }}"></button>
+            {% endfor %}
+          </div>
+          <div class="carousel-inner">
+            {% for roomimage in roomimages %}
+              <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ roomimage.image.url }}" class="d-block w-100" alt="...">
+              </div>
+            {% endfor %}
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                  data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+      </div>
+      <div class="col-md-4">
+
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title mb-3">{% trans "Address and contact" %}</h4>
+            <p>
+              <svg class="bi" width="24" height="24" fill="currentColor">
+                <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#geo"/>
+              </svg>
+              Rehlingstr. 2, 79100 Freiburg
+            </p>
+
+            <p>
+              <svg class="bi" width="24" height="24" fill="currentColor">
+                <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#person"/>
+              </svg>
+              {% if room.organization.contact_person is not None %}
+                <text> {{ room.organization.contact_person }}</text>
+              {% endif %}
+            </p>
+            <p>
+              <svg class="bi" width="24" height="24" fill="currentColor">
+                <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#envelope"/>
+              </svg>
+              {% if room.organization.email is not None %}
+                <a href="mailto:{{ room.organization.email }}">{{ room.organization.email }}</a>
+              {% else %}
+                <text class="text-secondary">{% trans "not added" %}</text>
+              {% endif %}
+            </p>
+
+            <p>
+              <svg class="bi" width="24" height="24" fill="currentColor">
+                <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#telephone"/>
+              </svg>
+              {% if room.organization.phone is not None %}
+                <a href="tel:{{ room.organization.phone }}">{{ room.organization.phone }}</a>
+              {% else %}
+                <text class="text-secondary">{% trans "not added" %}</text>
+              {% endif %}
+            </p>
+          </div>
+        </div>
+        <div class="mt-5">
+          <p class="h4">
+            <svg class="bi" width="24" height="24" fill="currentColor">
+              <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#people"/>
+            </svg>
+            {{ room.capacity_from }} - {{ room.capacity_to }} {% trans "Persons" %}</p>
+
+          <p class="h4">
+            <svg class="bi" width="24" height="24" fill="currentColor">
+              <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#square"/>
+            </svg>
+            {{ room.square_meters }} {% trans "m²" %}
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-12">
+        <h2>{% trans "Aptitudes" %}</h2>
+      </div>
+      {% for roomaptitude in roomaptitudes %}
+        <div class="col-sm-3">
+          <svg class="bi" width="24" height="24" fill="currentColor">
+            <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#{{ roomaptitude.aptitude.icon }}"/>
+          </svg>
+          {{ roomaptitude.aptitude.name }} <i>{{ roomaptitude.specification|default:"" }}</i>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="row mt-5"
+    ">
     <div class="col-12">
       <h2>{% trans "Amenities" %}</h2>
     </div>
@@ -100,27 +135,28 @@
       <div class="col-sm-3">
         <svg class="bi" width="24" height="24" fill="currentColor">
           <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#{{ roomamenity.amenity.icon }}"/>
-        </svg>{{ roomamenity.amenity.name }} <i>{{ roomamenity.specification }}</i>
+        </svg>
+        {{ roomamenity.amenity.name }} <i>{{ roomamenity.specification|default:"" }}</i>
       </div>
     {% endfor %}
   </div>
 
-  <div class="row">
-    <div class="col-12">
-      <h2>{% trans "Description" %}</h2>
-      {{ room.description|linebreaks }}
-    </div>
+  <div class="row mt-5"">
+  <div class="col-12">
+    <h2>{% trans "Description" %}</h2>
+    {{ room.description|linebreaks }}
+  </div>
   </div>
 
 
 
 
-    <h2>{% trans "Rules" %}</h2>
-    {{ room.rules }}
-    <h2>{% trans "Compensation" %}</h2>
-    {{ room.compensation }}
-    <h2>{% trans "Availability" %}</h2>
-    {{ room.general_availability }}
+  <h2>{% trans "Rules" %}</h2>
+  {{ room.rules }}
+  <h2>{% trans "Compensation" %}</h2>
+  {{ room.compensation }}
+  <h2>{% trans "Availability" %}</h2>
+  {{ room.general_availability }}
 
 {% endblock content %}
 
