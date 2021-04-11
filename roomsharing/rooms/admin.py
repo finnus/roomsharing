@@ -1,4 +1,5 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 
 from .models import Amenity, Aptitude, Room, RoomAmenity, RoomAptitude, RoomImage
 
@@ -15,13 +16,31 @@ class RoomAmenityInline(admin.TabularInline):
     model = RoomAmenity
 
 
-class RoomAdmin(admin.ModelAdmin):
+@admin.register(Room)
+class RoomAdmin(ImportExportModelAdmin):
     inlines = [RoomAptitudeInline, RoomAmenityInline, RoomImageInline]
 
 
-admin.site.register(Room, RoomAdmin)
-admin.site.register(Aptitude)
-admin.site.register(RoomAptitude)
-admin.site.register(Amenity)
-admin.site.register(RoomAmenity)
-admin.site.register(RoomImage)
+@admin.register(Aptitude)
+class AptitudeAdmin(ImportExportModelAdmin):
+    pass
+
+
+@admin.register(RoomAptitude)
+class RoomAptitude(ImportExportModelAdmin):
+    pass
+
+
+@admin.register(Amenity)
+class AmenityAdmin(ImportExportModelAdmin):
+    pass
+
+
+@admin.register(RoomAmenity)
+class RoomAmenityAdmin(ImportExportModelAdmin):
+    pass
+
+
+@admin.register(RoomImage)
+class RoomImageAdmin(ImportExportModelAdmin):
+    pass

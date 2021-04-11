@@ -141,22 +141,16 @@
     {% endfor %}
   </div>
 
-  <div class="row mt-5"">
+  <div class="row mt-5">
   <div class="col-12">
     <h2>{% trans "Description" %}</h2>
     {{ room.description|linebreaks }}
   </div>
   </div>
 
-
-
-
   <h2>{% trans "Rules" %}</h2>
   {{ room.rules }}
-  <h2>{% trans "Compensation" %}</h2>
-  {{ room.compensation }}
   <h2>{% trans "Availability" %}</h2>
   {{ room.general_availability }}
 
 {% endblock content %}
-

@@ -1,4 +1,5 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 from organizations.base_admin import (
     BaseOrganizationAdmin,
     BaseOrganizationOwnerAdmin,
@@ -13,18 +14,16 @@ class OwnerInline(BaseOwnerInline):
     model = OrganizationOwner
 
 
-class OrganizationAdmin(BaseOrganizationAdmin):
+@admin.register(Organization)
+class OrganizationAdmin(BaseOrganizationAdmin, ImportExportModelAdmin):
     inlines = [OwnerInline]
 
 
-class OrganizationUserAdmin(BaseOrganizationUserAdmin):
+@admin.register(OrganizationUser)
+class OrganizationUserAdmin(BaseOrganizationUserAdmin, ImportExportModelAdmin):
     pass
 
 
-class OrganizationOwnerAdmin(BaseOrganizationOwnerAdmin):
+@admin.register(OrganizationOwner)
+class OrganizationOwnerAdmin(BaseOrganizationOwnerAdmin, ImportExportModelAdmin):
     pass
-
-
-admin.site.register(Organization, OrganizationAdmin)
-admin.site.register(OrganizationUser, OrganizationUserAdmin)
-admin.site.register(OrganizationOwner, OrganizationOwnerAdmin)
