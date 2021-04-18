@@ -1,115 +1,124 @@
 {% load static i18n compress%}<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>{% block title %}Roomsharing{% endblock title %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Easily share rooms!">
-    <meta name="author" content="Finn Hees">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Roomsharing{% endblock title %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Easily share rooms!">
+  <meta name="author" content="Finn Hees">
 
-    <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
+  <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
 
-    {% block css %}
+  {% block css %}
 
     <!-- Latest compiled and minified Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <!-- Your stuff: Third-party CSS libraries go here -->
     {% compress css %}
-    <!-- This file stores project-specific CSS -->
+      <!-- This file stores project-specific CSS -->
 
-    <link href="{% static 'css/project.css' %}" rel="stylesheet">
+      <link href="{% static 'css/project.css' %}" rel="stylesheet">
 
     {% endcompress %}
-    {% endblock %}
-    <!-- Le javascript
-    ================================================== -->
-    {# Placed at the top of the document so pages load faster with defer #}
-    {% block javascript %}
+  {% endblock %}
+  <!-- Le javascript
+  ================================================== -->
+  {# Placed at the top of the document so pages load faster with defer #}
+  {% block javascript %}
 
-      <!-- Bootstrap JS Bundle with Popper -->
+    <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
-      <!-- Your stuff: Third-party javascript libraries go here -->
+    <!-- Your stuff: Third-party javascript libraries go here -->
 
 
-      <!-- place project specific Javascript in this file -->
-      {% compress js %}
+    <!-- place project specific Javascript in this file -->
+    {% compress js %}
       <script defer src="{% static 'js/project.js' %}"></script>
-      {% endcompress %}
+    {% endcompress %}
 
-    {% endblock javascript %}
+  {% endblock javascript %}
 
-  </head>
+</head>
 
-  <body>
+<body>
 
 <header>
   <nav class="navbar navbar-expand-md navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'home' %}">
-      <img src="{% static 'images/favicons/favicon.ico' %}" alt="" width="30" height="30" class="d-inline-block align-top">
-      RoomSharing
-    </a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-        <a class="nav-link" href="{% url 'rooms:list' %}">{% trans "Search Room" %}</a>
-        <a class="nav-link" href="#">{% trans "Manage Rooms" %}</a>
-        <a class="nav-link" href="{% url 'about' %}">{% trans "About" %}</a>
-      </div>
-    </div>
-
-    <div>
-    {% if request.user.is_authenticated %}
-      <div class="navbar-nav">
-        <div class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ request.user.username }}
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="{% url 'users:detail' request.user.username %}">{% trans "My Profile" %}</a></li>
-            <li><a class="dropdown-item" href="#">{% trans "My Organizations" %}</a></li>
-            <div class="dropdown-divider"></div>
-            {# URL provided by django-allauth/account/urls.py #}
-            <li><a class="dropdown-item" href="{% url 'account_logout' %}">Sign out</a></li>
-          </ul>
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img src="{% static 'images/favicons/favicon.ico' %}" alt="" width="30" height="30" class="d-inline-block align-top">
+        RoomSharing
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="navbar-nav">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+          <a class="nav-link" href="{% url 'rooms:list' %}">{% trans "Search Room" %}</a>
+          <a class="nav-link" href="#">{% trans "Manage Rooms" %}</a>
+          <a class="nav-link" href="{% url 'about' %}">{% trans "About" %}</a>
         </div>
+      </div>
+
+      <div>
+        {% if request.user.is_authenticated %}
+          <div class="navbar-nav">
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ request.user.username }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="{% url 'users:detail' request.user.username %}">{% trans "My Profile" %}</a></li>
+              <li><a class="dropdown-item" href="#">{% trans "My Organizations" %}</a></li>
+              <div class="dropdown-divider"></div>
+              {# URL provided by django-allauth/account/urls.py #}
+              <li><a class="dropdown-item" href="{% url 'account_logout' %}">Sign out</a></li>
+            </ul>
+          </div>
         {%  else %}
-            {# URL provided by django-allauth/account/urls.py #}
-            <a id="sign-up-link" class="btn btn-primary" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
-            {# URL provided by django-allauth/account/urls.py #}
-            <a id="log-in-link" class="btn btn-light" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
+          {# URL provided by django-allauth/account/urls.py #}
+          <a id="sign-up-link" class="btn btn-primary" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
+          {# URL provided by django-allauth/account/urls.py #}
+          <a id="log-in-link" class="btn btn-light" href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
         {% endif %}
+        </div>
       </div>
     </div>
-</nav>
+  </nav>
 </header>
 
+<div class="container-fluid mt-3">
+ <div class="row">
+    <div class="col-2">
+      <div class="">
+        {% block left_sidebar %}
+        {% endblock left_sidebar %}
+      </div>
+    </div>
 
-</div>
+    <div class="col-9">
 
-    <div class="container mt-3">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
+    {% endfor %}
+  {% endif %}
 
-      {% if messages %}
-          {% for message in messages %}
-              <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>
-          {% endfor %}
-      {% endif %}
+  {% block content %}
+    <p>Use this document as a way to quick start any new project.</p>
+  {% endblock content %}
+    </div>
+</div> <!-- /row -->
 
-      {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
+</div> <!-- /container -->
 
-    </div> <!-- /container -->
+{% block modal %}{% endblock modal %}
 
-    {% block modal %}{% endblock modal %}
-
-    {% block inline_javascript %}
-    {# Script tags with only code, no src (defer by default) #}
-    {% endblock inline_javascript %}
-  </body>
+{% block inline_javascript %}
+  {# Script tags with only code, no src (defer by default) #}
+{% endblock inline_javascript %}
+</body>
 </html>

@@ -1,5 +1,7 @@
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView
+from django_filters.views import FilterView
 
+from .filters import RoomFilter
 from .models import Room, RoomAmenity, RoomAptitude, RoomImage
 
 
@@ -27,9 +29,10 @@ class RoomDetailView(DetailView):
 room_detail_view = RoomDetailView.as_view()
 
 
-class RoomListView(ListView):
+class RoomListView(FilterView):
     model = Room
     template_name = "rooms/room_list.html"
+    filterset_class = RoomFilter
 
 
 room_list_view = RoomListView.as_view()
