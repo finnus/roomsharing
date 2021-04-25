@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 17:23+0100\n"
+"POT-Creation-Date: 2021-04-18 16:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,95 +26,114 @@ msgstr "Englisch"
 msgid "German"
 msgstr "Deutsch"
 
-#: roomsharing/rooms/apps.py:7 roomsharing/rooms/models.py:33
-#: roomsharing/templates/rooms/room_list.html:6
-#: roomsharing/templates/rooms/room_list.html:12
+#: roomsharing/rooms/apps.py:7 roomsharing/rooms/models.py:38
+#: roomsharing/templates/rooms/room_list.html:7
+#: roomsharing/templates/rooms/room_list.html:30
 msgid "Rooms"
 msgstr "Räume"
 
-#: roomsharing/rooms/models.py:10 roomsharing/rooms/models.py:38
-#: roomsharing/rooms/models.py:75
-msgid "Name"
-msgstr "Name"
-
-#: roomsharing/rooms/models.py:11 roomsharing/rooms/models.py:39
-#: roomsharing/rooms/models.py:76
-#: roomsharing/templates/rooms/room_detail.html:108
-msgid "Description"
-msgstr "Beschreibung"
-
-#: roomsharing/rooms/models.py:12
-msgid "Capacity from"
-msgstr "Kapazität von"
-
-#: roomsharing/rooms/models.py:13
-msgid "Capacity to"
-msgstr "Kapazität bis"
-
-#: roomsharing/rooms/models.py:14 roomsharing/rooms/models.py:15
-msgid "Square Meters"
-msgstr "Quadratmeter"
-
-#: roomsharing/rooms/models.py:16
-msgid "Published"
-msgstr "Veröffentlicht"
-
-#: roomsharing/rooms/models.py:32
-msgid "Room"
-msgstr "Raum"
-
-#: roomsharing/rooms/models.py:40 roomsharing/rooms/models.py:77
-msgid "Icon"
-msgstr "Icon"
-
-#: roomsharing/rooms/models.py:46
-msgid "Aptitude"
-msgstr "Tauglichkeit"
-
-#: roomsharing/rooms/models.py:47
-#: roomsharing/templates/rooms/room_detail.html:84
+#: roomsharing/rooms/filters.py:15 roomsharing/rooms/models.py:92
+#: roomsharing/templates/rooms/room_detail.html:123
 msgid "Aptitudes"
 msgstr "Tauglichkeiten"
 
-#: roomsharing/rooms/models.py:63 roomsharing/rooms/models.py:100
-msgid "Specification"
-msgstr "nähere Beschreibung"
-
-#: roomsharing/rooms/models.py:69
-msgid "Room Aptitude"
-msgstr "Raumtauglichkeit"
-
-#: roomsharing/rooms/models.py:70
-msgid "Room Aptitudes"
-msgstr "Raumtauglichkeiten"
-
-#: roomsharing/rooms/models.py:83
-msgid "Amenity"
-msgstr "Ausstattungsmerkmal"
-
-#: roomsharing/rooms/models.py:84
-#: roomsharing/templates/rooms/room_detail.html:97
+#: roomsharing/rooms/filters.py:22 roomsharing/rooms/models.py:133
+#: roomsharing/templates/rooms/room_detail.html:139
 msgid "Amenities"
 msgstr "Ausstattungsmerkmale"
 
-#: roomsharing/rooms/models.py:106
+#: roomsharing/rooms/filters.py:24
+#: roomsharing/templates/rooms/room_detail.html:111
+#: roomsharing/templates/rooms/room_list.html:53
+msgid "Persons"
+msgstr "Personen"
+
+#: roomsharing/rooms/filters.py:29 roomsharing/rs_organizations/models.py:21
+msgid "Organization"
+msgstr "Organisation"
+
+#: roomsharing/rooms/models.py:12 roomsharing/rooms/models.py:81
+#: roomsharing/rooms/models.py:122
+msgid "Name"
+msgstr "Name"
+
+#: roomsharing/rooms/models.py:14 roomsharing/rooms/models.py:83
+#: roomsharing/rooms/models.py:124
+#: roomsharing/templates/rooms/room_detail.html:154
+msgid "Description"
+msgstr "Beschreibung"
+
+#: roomsharing/rooms/models.py:16
+msgid "Capacity from"
+msgstr "Kapazität von"
+
+#: roomsharing/rooms/models.py:17
+msgid "Capacity to"
+msgstr "Kapazität bis"
+
+#: roomsharing/rooms/models.py:18
+msgid "Square Meters"
+msgstr "Quadratmeter"
+
+#: roomsharing/rooms/models.py:19
+#: roomsharing/templates/rooms/room_detail.html:159
+msgid "Rules"
+msgstr "Regeln"
+
+#: roomsharing/rooms/models.py:20
+msgid "Published"
+msgstr "Veröffentlicht"
+
+#: roomsharing/rooms/models.py:37
+msgid "Room"
+msgstr "Raum"
+
+#: roomsharing/rooms/models.py:75
+msgid "Room Image"
+msgstr "Raumbild"
+
+#: roomsharing/rooms/models.py:76
+msgid "Room Images"
+msgstr "Raumbilder"
+
+#: roomsharing/rooms/models.py:85 roomsharing/rooms/models.py:126
+msgid "Icon"
+msgstr "Icon"
+
+#: roomsharing/rooms/models.py:91
+msgid "Aptitude"
+msgstr "Tauglichkeit"
+
+#: roomsharing/rooms/models.py:109 roomsharing/rooms/models.py:150
+msgid "Specification"
+msgstr "nähere Beschreibung"
+
+#: roomsharing/rooms/models.py:116
+msgid "Room Aptitude"
+msgstr "Raumtauglichkeit"
+
+#: roomsharing/rooms/models.py:117
+msgid "Room Aptitudes"
+msgstr "Raumtauglichkeiten"
+
+#: roomsharing/rooms/models.py:132
+msgid "Amenity"
+msgstr "Ausstattungsmerkmal"
+
+#: roomsharing/rooms/models.py:157
 msgid "Room Amenity"
 msgstr "Raumausstattungsmerkmal"
 
-#: roomsharing/rooms/models.py:107
+#: roomsharing/rooms/models.py:158
 msgid "Room Amenities"
 msgstr "Raumausstattungsmerkmale"
 
 #: roomsharing/rs_organizations/apps.py:7
 #: roomsharing/rs_organizations/models.py:22
-#: roomsharing/templates/organisations/organization_list.html:6
-#: roomsharing/templates/organisations/organization_list.html:10
+#: roomsharing/templates/rs_organizations/organization_list.html:6
+#: roomsharing/templates/rs_organizations/organization_list.html:10
 msgid "Organizations"
 msgstr "Organisationen"
-
-#: roomsharing/rs_organizations/models.py:21
-msgid "Organization"
-msgstr "Organisation"
 
 #: roomsharing/templates/account/account_inactive.html:5
 #: roomsharing/templates/account/account_inactive.html:8
@@ -391,35 +410,27 @@ msgstr "Mein Profil"
 msgid "My Organizations"
 msgstr "Meine Organisationen"
 
-#: roomsharing/templates/rooms/room_detail.html:30
+#: roomsharing/templates/rooms/room_detail.html:58
 msgid "Address and contact"
 msgstr "Adresse und Kontakt"
 
-#: roomsharing/templates/rooms/room_detail.html:45
-#: roomsharing/templates/rooms/room_detail.html:56
+#: roomsharing/templates/rooms/room_detail.html:81
+#: roomsharing/templates/rooms/room_detail.html:92
 msgid "not added"
 msgstr "nicht hinterlegt"
 
-#: roomsharing/templates/rooms/room_detail.html:72
-#: roomsharing/templates/rooms/room_list.html:29
-msgid "Persons"
-msgstr "Personen"
+#: roomsharing/templates/rooms/room_detail.html:106
+msgid "Room Size"
+msgstr "Raumgröße"
 
-#: roomsharing/templates/rooms/room_detail.html:78
+#: roomsharing/templates/rooms/room_detail.html:117
 msgid "m²"
 msgstr "m²"
 
-#: roomsharing/templates/rooms/room_detail.html:116
-msgid "Rules"
-msgstr "Regeln"
-
-#: roomsharing/templates/rooms/room_detail.html:118
-msgid "Compensation"
-msgstr "Kompensation"
-
-#: roomsharing/templates/rooms/room_detail.html:120
-msgid "Availability"
-msgstr "Verfügbarkeit"
+#: roomsharing/templates/rooms/room_list.html:12
+#: roomsharing/templates/rooms/room_list.html:17
+msgid "Filter"
+msgstr "Filter"
 
 #: roomsharing/users/admin.py:18
 msgid "Personal info"

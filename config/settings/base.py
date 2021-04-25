@@ -80,6 +80,7 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "import_export",
     "django_filters",
+    "markdownx",
 ]
 
 LOCAL_APPS = [

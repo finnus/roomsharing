@@ -1,5 +1,7 @@
 from django.contrib import admin
+from django.db import models
 from import_export.admin import ImportExportModelAdmin
+from markdownx.widgets import AdminMarkdownxWidget
 
 from .models import Amenity, Aptitude, Room, RoomAmenity, RoomAptitude, RoomImage
 
@@ -19,6 +21,10 @@ class RoomAmenityInline(admin.TabularInline):
 @admin.register(Room)
 class RoomAdmin(ImportExportModelAdmin):
     inlines = [RoomAptitudeInline, RoomAmenityInline, RoomImageInline]
+
+    formfield_overrides = {
+        models.TextField: {"widget": AdminMarkdownxWidget},
+    }
 
 
 @admin.register(Aptitude)

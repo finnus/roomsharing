@@ -8,5 +8,5 @@ from roomsharing.rs_organizations.views import (
 app_name = "rs_organizations"
 urlpatterns = [
     path("", organization_list_view, name="list"),
-    path("<str:pk>/", organization_detail_view, name="detail"),
+    path("<slug:slug>/", organization_detail_view, name="detail"),
 ]

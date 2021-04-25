@@ -12,4 +12,4 @@ def test_organization__str__():
 
 def test_organization_get_absolute_url():
     o = OrganizationFactory()
-    assert o.get_absolute_url() == f"/organizations/{o.pk}/"
+    assert o.get_absolute_url() == f"/organizations/{o.slug}/"

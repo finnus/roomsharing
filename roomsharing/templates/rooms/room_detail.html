@@ -2,6 +2,7 @@
 
 {% load i18n static %}
 {% load crispy_forms_tags %}
+{% load rooms_tags %}
 
 {% block title %}{{ room.name }}{% endblock %}
 {% block content_title %}
@@ -93,23 +94,28 @@
             </p>
           </div>
         </div>
-        <div class="mt-5">
-          <p class="h4">
-            <svg class="bi" width="24" height="24" fill="currentColor">
-              <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#people"/>
-            </svg>
-            {{ room.capacity_from }} - {{ room.capacity_to }} {% trans "Persons" %}</p>
 
-          <p class="h4">
-            <svg class="bi" width="24" height="24" fill="currentColor">
-              <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#square"/>
-            </svg>
-            {{ room.square_meters }} {% trans "m²" %}
-          </p>
-        </div>
 
       </div>
 
+    </div>
+
+
+    <div class="row mt-5">
+      <div class="col-12">
+        <h2>{% trans "Room Size" %}</h2>
+      </div>
+      <div class="col-sm-3 p-3">
+        <svg class="bi" width="24" height="24" fill="currentColor">
+              <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#people"/>
+        </svg> {{ room.capacity_from }} - {{ room.capacity_to }} {% trans "Persons" %}</p>
+      </div>
+
+      <div class="col-sm-3 p-3">
+        <svg class="bi" width="24" height="24" fill="currentColor">
+              <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#square"/>
+        </svg>{{ room.square_meters }} {% trans "m²" %}
+      </div>
     </div>
 
     <div class="row mt-5">
@@ -117,11 +123,12 @@
         <h2>{% trans "Aptitudes" %}</h2>
       </div>
       {% for roomaptitude in roomaptitudes %}
-        <div class="col-sm-3">
+        <div class="col-sm-3 p-3">
           <svg class="bi" width="24" height="24" fill="currentColor">
             <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#{{ roomaptitude.aptitude.icon }}"/>
           </svg>
-          {{ roomaptitude.aptitude.name }} <i>{{ roomaptitude.specification|default:"" }}</i>
+          {{ roomaptitude.aptitude.name }}<br>
+          <i><small>{{ roomaptitude.specification|default:"" }}</small></i>
         </div>
       {% endfor %}
     </div>
@@ -132,11 +139,12 @@
       <h2>{% trans "Amenities" %}</h2>
     </div>
     {% for roomamenity in roomamenities %}
-      <div class="col-sm-3">
+      <div class="col-sm-3 p-3">
         <svg class="bi" width="24" height="24" fill="currentColor">
           <use xlink:href="{% static 'images/bootstrap-icons.svg' %}#{{ roomamenity.amenity.icon }}"/>
         </svg>
-        {{ roomamenity.amenity.name }} <i>{{ roomamenity.specification|default:"" }}</i>
+        {{ roomamenity.amenity.name }}<br>
+        <i><small>{{ roomamenity.specification|default:"" }}</small></i>
       </div>
     {% endfor %}
   </div>
@@ -144,13 +152,11 @@
   <div class="row mt-5">
   <div class="col-12">
     <h2>{% trans "Description" %}</h2>
-    {{ room.description|linebreaks }}
+    {{ room.description|formatted_markdown }}
   </div>
   </div>
 
   <h2>{% trans "Rules" %}</h2>
-  {{ room.rules }}
-  <h2>{% trans "Availability" %}</h2>
-  {{ room.general_availability }}
+  {{ room.rules|formatted_markdown }}
 
 {% endblock content %}

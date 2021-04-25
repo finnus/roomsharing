@@ -4,12 +4,18 @@ from django.utils.translation import gettext_lazy as _
 from django_extensions.db.fields import AutoSlugField
 from PIL import Image
 
-from roomsharing.rs_organizations.models import Organization
+from roomsharing.rs_organizations.models import Organization, OrganizationalAddress
 
 
 class Room(models.Model):
     # characteristics of the room
     name = models.CharField(_("Name"), max_length=200)
+    address = models.ForeignKey(
+        OrganizationalAddress,
+        related_name="rooms_of_organizationaladdress",
+        related_query_name="room_of_organizationaladdress",
+        on_delete=models.PROTECT,
+    )
     description = models.TextField(
         _("Description"), max_length=4000, blank=True, null=True
     )

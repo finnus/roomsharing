@@ -2,7 +2,10 @@ from factory import Faker, Sequence, SubFactory
 from factory.django import DjangoModelFactory
 
 from roomsharing.rooms.models import Room
-from roomsharing.rs_organizations.tests.factories import OrganizationFactory
+from roomsharing.rs_organizations.tests.factories import (
+    OrganizationalAddressFactory,
+    OrganizationFactory,
+)
 
 
 class RoomFactory(DjangoModelFactory):
@@ -17,3 +20,4 @@ class RoomFactory(DjangoModelFactory):
     square_meters = 20
     rules = Faker("sentence", nb_words=10)
     published = True
+    address = SubFactory(OrganizationalAddressFactory)
